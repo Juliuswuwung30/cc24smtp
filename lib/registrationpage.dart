@@ -17,6 +17,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
 
+
   bool isLoading = false;
 
   static Future<String> sendEmail(String email, String username) async {

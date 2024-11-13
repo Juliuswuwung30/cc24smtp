@@ -10,15 +10,16 @@ final router = GoRouter(
       path: '/',
       name: 'Registration Page',
       builder: (context, state) => const RegistrationPage(),
-
     ),
     GoRoute(
       path: '/success',
       name: 'Registration Successful',
-      builder: (context, state) => const RegistrationSuccesfull(),
-    )
-  ]
-);
+      builder: (context, state) {
+        var username = state.queryParams['username'].toString();
+
+        return RegistrationSuccesfull(username: username);
+      }),
+  ]);
 
 void main() {
   runApp(
@@ -40,7 +41,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RegistrationSuccesfull(),
-    );
-  }
+    );  
+    }
 }

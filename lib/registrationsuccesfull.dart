@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RegistrationSuccesfull extends StatefulWidget {
-  const RegistrationSuccesfull({super.key});
+  final String username;
+  const RegistrationSuccesfull({super.key, required this.username});
 
   @override
   State<RegistrationSuccesfull> createState() => _RegistrationSuccesfullState();
@@ -24,8 +25,8 @@ class _RegistrationSuccesfullState extends State<RegistrationSuccesfull> {
               size: 100,
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Your registration was successful!',
+            Text(
+              'Hai ${widget.username}, Welcome to Doyan Belajar',
               style: TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 20),
