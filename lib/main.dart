@@ -16,8 +16,10 @@ final router = GoRouter(
       name: 'Registration Successful',
       builder: (context, state) {
         var username = state.queryParams['username'].toString();
+        var fullusername = state.queryParams['fullusername'].toString();
+        var nim = state.queryParams['nim'].toString();
 
-        return RegistrationSuccesfull(username: username);
+        return RegistrationSuccesfull(username: username, fullusername: fullusername, nim: nim);
       }),
   ]);
 

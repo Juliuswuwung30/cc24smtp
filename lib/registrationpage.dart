@@ -16,11 +16,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _registrationFormKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
+  final _fullusernameController = TextEditingController();
+  final _nimController = TextEditingController();
 
 
   bool isLoading = false;
 
-  static Future<String> sendEmail(String email, String username) async {
+  static Future<String> sendEmail(String email, String username, String fullusername, String nim) async {
     String endpoint = '10.0.2.2:8000';
     String nextUrl = '/kirim-email';
 
@@ -32,6 +34,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: jsonEncode({
         'email': email,
         'username': username,
+        'fullusername': fullusername,
+        'nim': nim,
       }),
     );
 
@@ -112,6 +116,37 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         },
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: _fullusernameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Full Username',
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your full username';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      controller: _nimController,
+                      decoration: const InputDecoration(
+                        labelText: 'NIM',
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                        return 'Please enter your NIM';
+                        }
+                        return null;
+                      },
+                      ),
+                    ),
                     const Spacer(),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -122,7 +157,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               isLoading = true;
                             });
 
-                            sendEmail(_emailController.text, _usernameController.text).then((result) {
+                            sendEmail(_emailController.text, _usernameController.text, _fullusernameController.text, _nimController.text).then((result) {
                               setState(() {
                                 isLoading = false;
                               });
